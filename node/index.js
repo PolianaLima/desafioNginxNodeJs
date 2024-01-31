@@ -12,8 +12,8 @@ const port = 3000;
 const mysql = require('mysql2')
 const connection = mysql.createConnection(config)
 
-/* const deleteSql = `DELETE FROM people`
-connection.query(deleteSql) */
+ const createTable = `CREATE TABLE people(id int auto_increment, name varchar(255), primary key(id))`
+connection.query(createTable) 
 
 const sql = `INSERT INTO people(name) values('Poliana'), ('Andre'), ('Alice')`
 connection.query(sql) 
