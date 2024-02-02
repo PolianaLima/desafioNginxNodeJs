@@ -12,23 +12,23 @@ const port = 3000;
 const mysql = require('mysql2')
 const connection = mysql.createConnection(config)
 
- const createTable = `CREATE TABLE people(id int auto_increment, name varchar(255), primary key(id))`
+const createTable = `CREATE TABLE IF NOT EXISTS people(id int auto_increment, name varchar(255), primary key(id))`
 connection.query(createTable) 
-
+    
 const sql = `INSERT INTO people(name) values('Poliana'), ('Andre'), ('Alice')`
-connection.query(sql) 
+connection.query(sql)
 
 app.get('/people', (req, res) => {
-    const sql = 'SELECT * FROM people';
+const sql = 'SELECT * FROM people';
 
-    connection.query(sql, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
+connection.query(sql, (err, results) => {
+    if (err) {
+        return res.status(500).json({ error: err.message });
+    }
 
-        res.json(results);
+    res.json(results);
 
-        connection.end();
+    connection.end();
     });
 });
 

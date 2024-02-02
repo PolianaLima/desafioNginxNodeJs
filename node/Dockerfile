@@ -1,10 +1,6 @@
 FROM node:15
 
-WORKDIR /usr/src/app
-
 COPY . .
-
-RUN rm -rf node_modules
 
 RUN npm install
 
